@@ -1,10 +1,12 @@
 
 
 plugins {
-  id 'com.android.application'
-  id 'kotlin-android'
-  id 'kotlin-kapt'
+  id "com.android.application"
+  id "kotlin-android"
+  id "kotlin-kapt"
 }
+
+
 
 android {
   compileSdkVersion 30
@@ -23,13 +25,13 @@ android {
     def apikeyProperties = new Properties()
     apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
-    buildConfigField("String", "ACCESS_KEY", apikeyProperties['ACCESS_KEY'])
+    buildConfigField("String", "ACCESS_KEY", apikeyProperties["ACCESS_KEY"])
   }
 
   buildTypes {
     release {
       minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+      proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
     }
   }
   compileOptions {
@@ -37,68 +39,54 @@ android {
     targetCompatibility JavaVersion.VERSION_1_8
   }
   kotlinOptions {
-    jvmTarget = '1.8'
+    jvmTarget = "1.8"
   }
 }
 
 dependencies {
 
-  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation 'androidx.core:core-ktx:1.3.2'
-
-  def lifecycle_version = "2.2.0"
-  def arch_version = "2.1.0"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
+  implementation "androidx.core:core-ktx:$versions.core_ctx"
 
   // ViewModel
-  implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+  implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
   // LiveData
-  implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+  implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle"
   // Annotation processor
-  kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+  kapt "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
 
-  implementation 'androidx.appcompat:appcompat:1.2.0'
-  implementation 'com.google.android.material:material:1.2.1'
-  implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-  implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+  implementation "androidx.appcompat:appcompat:$versions.appcompat"
+  implementation "com.google.android.material:material:$versions.material"
+  implementation "androidx.constraintlayout:constraintlayout:$versions.constraint"
+  implementation "androidx.vectordrawable:vectordrawable:$versions.vectordrawable"
 
-  implementation "androidx.recyclerview:recyclerview:1.1.0"
+  implementation "androidx.recyclerview:recyclerview:$versions.recycler"
 
-  implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
-  implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
-  implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
-  implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
+  implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle"
+  implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
+  implementation "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
+  implementation "androidx.navigation:navigation-ui-ktx:$versions.navigation"
 
-  implementation 'com.github.bumptech.glide:glide:4.11.0'
-  annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+  implementation "com.github.bumptech.glide:glide:$versions.glide"
+  annotationProcessor "com.github.bumptech.glide:compiler:$versions.glide"
 
-  def rx = "3.0.0"
-  implementation "io.reactivex.rxjava3:rxandroid:$rx"
-  implementation "io.reactivex.rxjava3:rxkotlin:$rx"
+  implementation "io.reactivex.rxjava3:rxandroid:$versions.rx"
+  implementation "io.reactivex.rxjava3:rxkotlin:$versions.rx"
 
-  def work_version = "2.4.0"
-  implementation "androidx.work:work-runtime:$work_version"
+  implementation "androidx.work:work-runtime:$versions.work"
 
+  implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
+  implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+  implementation "com.github.akarnokd:rxjava3-retrofit-adapter:$versions.rx"
+  implementation("com.squareup.okhttp3:logging-interceptor:$versions.logging_interceptor")
 
-  def retrofit = "2.4.0"
-  implementation "com.squareup.retrofit2:retrofit:$retrofit"
-  implementation "com.github.akarnokd:rxjava3-retrofit-adapter:$rx"
-  implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
+  testImplementation "junit:junit:$versions.junit"
 
-  testImplementation 'junit:junit:4.+'
-  androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-  androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+  implementation "androidx.room:room-runtime:$versions.room"
+  kapt "androidx.room:room-compiler:$versions.room"
+  implementation "androidx.room:room-ktx:$versions.room"
+  testImplementation "androidx.room:room-testing:$versions.room"
 
-  def room_version = "2.2.5"
-  implementation "androidx.room:room-runtime:$room_version"
-  kapt "androidx.room:room-compiler:$room_version"
-
-  // optional - Kotlin Extensions and Coroutines support for Room
-  implementation "androidx.room:room-ktx:$room_version"
-
-  // optional - Test helpers
-  testImplementation "androidx.room:room-testing:$room_version"
-
-  def dagger = "2.29.1"
-  api "com.google.dagger:dagger:$dagger"
-  annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
+  api "com.google.dagger:dagger:$versions.dagger"
+  kapt "com.google.dagger:dagger-compiler:$versions.dagger"
 }
