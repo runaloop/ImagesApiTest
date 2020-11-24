@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import dagger.MapKey
 import kotlin.reflect.KClass
 
-//TODO: What if remove must be documented
-//@MustBeDocumented
+
+@MustBeDocumented
 @Target(
     AnnotationTarget.FUNCTION,
     AnnotationTarget.PROPERTY_GETTER,

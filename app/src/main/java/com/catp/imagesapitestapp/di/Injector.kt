@@ -6,16 +6,27 @@ import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.catp.imagesapitestapp.App
 
+/**
+ * Вот где храняться эти мульти биндинги?
+ * Нужно ли мультибиндинг скоупить? или оно автоматом скопится? к текущему компонент скоупу?
+ * Если FragmentsModule понятно они прям в нем, то вот для ViewModel как? в стандартном хранилище ViewModelStore и если там нет то создаеться? а где этот код? который чекает наличие в ViewModelStore
+ * Если в модуле есть констуктор то как в компоненте прокинуть параметр этого конструктора?
+ * Если есть зависимые компоненты зачем нужны сабкомпонентс?
+ * Можно ли в синглтоне сохранять ссылку на appComponent в ActivityLifecycleCallbacks
+ * Зачем нужна MustBeDocumented в FragmentKey
+ * Получается дагер сразу генерит 2 типа зависимостей - первый это простая зависимость, вторая это провайдеры, и одновременно можно оба использовать?
+ * JvmSuppressWildcards зачем нуен
+ */
 object Injector {
     fun init(app: App) {
-        val appComonent = DaggerAppComponent.builder().application(app)
+        val appComponent = DaggerAppComponent.builder().application(app)
             .build()
-        appComonent.inject(app)
+        appComponent.inject(app)
         app
             .registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
                 override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-                    appComonent.inject(activity)
-                    (activity as FragmentActivity).supportFragmentManager.fragmentFactory = appComonent.daggerFragmentFactory()
+                    appComponent.inject(activity)
+                    (activity as FragmentActivity).supportFragmentManager.fragmentFactory = appComponent.daggerFragmentFactory()
                 }
 
                 override fun onActivityStarted(activity: Activity) {
@@ -43,27 +54,4 @@ object Injector {
                 }
             })
     }
-
-    /*private fun handleActivity(activity: Activity) {
-        if (activity is HasSupportFragmentInjector) {
-            AndroidInjection.inject(activity)
-        }
-        if (activity is FragmentActivity) {
-            activity.supportFragmentManager
-                .registerFragmentLifecycleCallbacks(
-                    object : FragmentManager.FragmentLifecycleCallbacks() {
-                        override fun onFragmentCreated(
-                            fm: FragmentManager,
-                            f: Fragment,
-                            savedInstanceState: Bundle?
-                        ) {
-                            if (f is Injectable) {
-                                AndroidSupportInjection.inject(f)
-                            }
-                        }
-                    }, true
-                )
-        }
-
-    }*/
 }

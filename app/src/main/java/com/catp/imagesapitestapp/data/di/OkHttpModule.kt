@@ -1,6 +1,5 @@
 package com.catp.imagesapitestapp.data.di
 
-import com.catp.imagesapitestapp.di.ContextModule
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

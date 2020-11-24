@@ -9,8 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.catp.imagesapitestapp.R
+import javax.inject.Inject
 
-class NotificationsFragment : Fragment() {
+
+class NotificationsFragment @Inject constructor(): Fragment() {
 
     private lateinit var notificationsViewModel: NotificationsViewModel
 

@@ -7,23 +7,21 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.catp.imagesapitestapp.R
-import com.catp.imagesapitestapp.data.UnsplashService
+import com.catp.imagesapitestapp.di.viewModelWithProvider
 import javax.inject.Inject
+import javax.inject.Provider
 
-class HomeFragment @Inject constructor(var api: UnsplashService) : Fragment() {
+class HomeFragment @Inject constructor(
+    private val viewModelProvider: Provider<HomeViewModel>
+) : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
-
-
+    private val homeViewModel by viewModelWithProvider { viewModelProvider.get() }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         val textView: TextView = root.findViewById(R.id.text_home)
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
@@ -36,9 +34,6 @@ class HomeFragment @Inject constructor(var api: UnsplashService) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /*api.listPhotos()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()*/
+
     }
 }
