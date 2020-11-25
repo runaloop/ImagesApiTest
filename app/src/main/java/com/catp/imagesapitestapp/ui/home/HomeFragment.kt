@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.catp.imagesapitestapp.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.catp.imagesapitestapp.databinding.FragmentHomeBinding
 import com.catp.imagesapitestapp.di.viewModelWithProvider
+import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -22,14 +23,22 @@ class HomeFragment @Inject constructor(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+        val binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        homeViewModel.errorText.observe(viewLifecycleOwner, Observer {
+            Snackbar.make(binding.root, it, Snackbar.LENGTH_LONG)
         })
+        val adapter = PhotosAdapter(mutableListOf())
+        binding.recyclerView.let {
+            it.layoutManager = LinearLayoutManager(activity)
+            it.adapter = adapter
+        }
 
+        homeViewModel.items.observe(viewLifecycleOwner) {
+            adapter.setData(it)
+        }
 
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

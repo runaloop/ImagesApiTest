@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.catp.imagesapitestapp.data.Photo
 import com.catp.imagesapitestapp.data.UnsplashService
+import com.catp.imagesapitestapp.util.SingleLiveEvent
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
@@ -18,10 +19,8 @@ class HomeViewModel @Inject constructor(
     ViewModel() {
 
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
+    private val _errorText = SingleLiveEvent<String>()
+    val errorText = _errorText as LiveData<String>
 
     private val _loading = MutableLiveData<Boolean>().apply {
         true
@@ -41,7 +40,7 @@ class HomeViewModel @Inject constructor(
             }
             .doOnError {
                 _loading.value = false
-                _text.value = "Error ${it.message}"
+                _errorText.value = "Error ${it.message}"
             }
             .subscribe { newValues ->
                 _items.value = newValues

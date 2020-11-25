@@ -5,7 +5,7 @@ import android.app.Application
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.catp.imagesapitestapp.App
-
+//    android:paddingTop="?attr/actionBarSize" как быстро находить подобные косяки?
 /**
  * Вот где храняться эти мульти биндинги?
  * Нужно ли мультибиндинг скоупить? или оно автоматом скопится? к текущему компонент скоупу?
@@ -16,6 +16,7 @@ import com.catp.imagesapitestapp.App
  * Зачем нужна MustBeDocumented в FragmentKey
  * Получается дагер сразу генерит 2 типа зависимостей - первый это простая зависимость, вторая это провайдеры, и одновременно можно оба использовать?
  * JvmSuppressWildcards зачем нуен
+ * Нужно ли инжектить LiveData/MutableLiveData в ViewModel?
  */
 object Injector {
     fun init(app: App) {

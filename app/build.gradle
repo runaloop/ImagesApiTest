@@ -1,92 +1,92 @@
-
-
 plugins {
-  id "com.android.application"
-  id "kotlin-android"
-  id "kotlin-kapt"
+    id "com.android.application"
+    id "kotlin-android"
+    id "kotlin-kapt"
 }
 
 
-
 android {
-  compileSdkVersion 30
-  buildToolsVersion "30.0.1"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.1"
 
-  defaultConfig {
-    applicationId "com.catp.imagesapitestapp"
-    minSdkVersion 21
-    targetSdkVersion 30
-    versionCode 1
-    versionName "1.0"
+    defaultConfig {
+        applicationId "com.catp.imagesapitestapp"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
 
-    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-    def apikeyPropertiesFile = file("apikey.properties")
-    def apikeyProperties = new Properties()
-    apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+        def apikeyPropertiesFile = file("apikey.properties")
+        def apikeyProperties = new Properties()
+        apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
-    buildConfigField("String", "ACCESS_KEY", apikeyProperties["ACCESS_KEY"])
-  }
-
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        buildConfigField("String", "ACCESS_KEY", apikeyProperties["ACCESS_KEY"])
     }
-  }
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
-  kotlinOptions {
-    jvmTarget = "1.8"
-  }
+    buildFeatures {
+        dataBinding true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
 
-  implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
-  implementation "androidx.core:core-ktx:$versions.core_ctx"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
+    implementation "androidx.core:core-ktx:$versions.core_ctx"
 
-  // ViewModel
-  implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
-  // LiveData
-  implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle"
-  // Annotation processor
-  kapt "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle"
+    // Annotation processor
+    kapt "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
 
-  implementation "androidx.appcompat:appcompat:$versions.appcompat"
-  implementation "com.google.android.material:material:$versions.material"
-  implementation "androidx.constraintlayout:constraintlayout:$versions.constraint"
-  implementation "androidx.vectordrawable:vectordrawable:$versions.vectordrawable"
+    implementation "androidx.appcompat:appcompat:$versions.appcompat"
+    implementation "com.google.android.material:material:$versions.material"
+    implementation "androidx.constraintlayout:constraintlayout:$versions.constraint"
+    implementation "androidx.vectordrawable:vectordrawable:$versions.vectordrawable"
 
-  implementation "androidx.recyclerview:recyclerview:$versions.recycler"
+    implementation "androidx.recyclerview:recyclerview:$versions.recycler"
 
-  implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle"
-  implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
-  implementation "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
-  implementation "androidx.navigation:navigation-ui-ktx:$versions.navigation"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
+    implementation "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$versions.navigation"
 
-  implementation "com.github.bumptech.glide:glide:$versions.glide"
-  annotationProcessor "com.github.bumptech.glide:compiler:$versions.glide"
+    implementation "com.github.bumptech.glide:glide:$versions.glide"
+    annotationProcessor "com.github.bumptech.glide:compiler:$versions.glide"
 
-  implementation "io.reactivex.rxjava3:rxandroid:$versions.rx"
-  implementation "io.reactivex.rxjava3:rxkotlin:$versions.rx"
+    implementation "io.reactivex.rxjava3:rxandroid:$versions.rx"
+    implementation "io.reactivex.rxjava3:rxkotlin:$versions.rx"
 
-  implementation "androidx.work:work-runtime:$versions.work"
+    implementation "androidx.work:work-runtime:$versions.work"
 
-  implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
-  implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit"
-  implementation "com.github.akarnokd:rxjava3-retrofit-adapter:$versions.rx"
-  implementation("com.squareup.okhttp3:logging-interceptor:$versions.logging_interceptor")
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+    implementation "com.github.akarnokd:rxjava3-retrofit-adapter:$versions.rx"
+    implementation("com.squareup.okhttp3:logging-interceptor:$versions.logging_interceptor")
 
-  testImplementation "junit:junit:$versions.junit"
+    testImplementation "junit:junit:$versions.junit"
 
-  implementation "androidx.room:room-runtime:$versions.room"
-  kapt "androidx.room:room-compiler:$versions.room"
-  implementation "androidx.room:room-ktx:$versions.room"
-  testImplementation "androidx.room:room-testing:$versions.room"
+    implementation "androidx.room:room-runtime:$versions.room"
+    kapt "androidx.room:room-compiler:$versions.room"
+    implementation "androidx.room:room-ktx:$versions.room"
+    testImplementation "androidx.room:room-testing:$versions.room"
 
-  api "com.google.dagger:dagger:$versions.dagger"
-  kapt "com.google.dagger:dagger-compiler:$versions.dagger"
+    api "com.google.dagger:dagger:$versions.dagger"
+    kapt "com.google.dagger:dagger-compiler:$versions.dagger"
 }
