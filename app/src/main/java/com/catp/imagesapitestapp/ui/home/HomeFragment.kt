@@ -14,7 +14,8 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 class HomeFragment @Inject constructor(
-    private val viewModelProvider: Provider<HomeViewModel>
+    private val viewModelProvider: Provider<HomeViewModel>,
+    private val adapter: PhotosAdapter
 ) : Fragment() {
 
     private val homeViewModel by viewModelWithProvider { viewModelProvider.get() }
@@ -28,7 +29,6 @@ class HomeFragment @Inject constructor(
         homeViewModel.errorText.observe(viewLifecycleOwner, Observer {
             Snackbar.make(binding.root, it, Snackbar.LENGTH_LONG)
         })
-        val adapter = PhotosAdapter(mutableListOf())
         binding.recyclerView.let {
             it.layoutManager = LinearLayoutManager(activity)
             it.adapter = adapter

@@ -14,7 +14,7 @@ interface Dao {
     fun getLiked(): List<Photo>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun updatePhoto(photo: Photo)
+    fun updatePhoto(photo: Photo): Long
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAll(photos: List<Photo>)

@@ -6,8 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.catp.imagesapitestapp.data.model.db.Photo
 import com.catp.imagesapitestapp.databinding.PhotoItemBinding
+import javax.inject.Inject
 
-class PhotosAdapter(private val data: MutableList<Photo>) :
+class PhotosAdapter @Inject constructor(
+    private val data: MutableList<Photo> = mutableListOf(),
+    private val itemClickListener: OnItemClickListener
+) :
     RecyclerView.Adapter<PhotoViewHolder>() {
 
 
@@ -30,7 +34,11 @@ class PhotosAdapter(private val data: MutableList<Photo>) :
     }
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
-        holder.bind(data[position])
+        val photo = data[position]
+        holder.bind(photo)
+        holder.itemBinding.likeImage.setOnClickListener {
+            itemClickListener.onClick(photo)
+        }
     }
 
     override fun getItemCount(): Int =

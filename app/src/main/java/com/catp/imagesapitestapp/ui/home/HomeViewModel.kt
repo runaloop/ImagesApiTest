@@ -76,4 +76,22 @@ class HomeViewModel @Inject constructor(
         cs.clear()
         super.onCleared()
     }
+
+    fun onLikeClick(photo: Photo) {
+        if (photo.liked) {
+            photo.liked = false
+            photo.likes--
+        } else {
+            photo.liked = true
+            photo.likes++
+        }
+        repo.updatePhoto(photo)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+
+            },{
+                _errorText.value = "Can't update: ${it.message}"
+            })
+            .addTo(cs)
+    }
 }

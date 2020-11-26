@@ -5,6 +5,7 @@ import android.app.Application
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.catp.imagesapitestapp.App
+//PhotoViewHolder нужно ли засовывать в дагер? и как лучше провайдером?
 //android:backgroundTint="#0fff" пока этого не было, цвет бекграунда иконки был серым, как выяснить кто его так покрасил?
 // ApiPhotoToDbPhotoConverter наверняка ведь есть более человеческий способ это заколбаисть?
 //    android:paddingTop="?attr/actionBarSize" как быстро находить подобные косяки?
