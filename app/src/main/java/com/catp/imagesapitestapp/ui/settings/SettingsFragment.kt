@@ -1,4 +1,4 @@
-package com.catp.imagesapitestapp.ui.dashboard
+package com.catp.imagesapitestapp.ui.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,20 +11,21 @@ import androidx.lifecycle.ViewModelProvider
 import com.catp.imagesapitestapp.R
 import javax.inject.Inject
 
-class DashboardFragment @Inject constructor(): Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+class SettingsFragment @Inject constructor(): Fragment() {
+
+    private lateinit var settingsViewModel: SettingsViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-                ViewModelProvider(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
+        settingsViewModel =
+                ViewModelProvider(this).get(SettingsViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_settings, container, false)
+        val textView: TextView = root.findViewById(R.id.text_notifications)
+        settingsViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

@@ -1,4 +1,4 @@
-package com.catp.imagesapitestapp.ui.notifications
+package com.catp.imagesapitestapp.ui.favorites
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,21 +11,20 @@ import androidx.lifecycle.ViewModelProvider
 import com.catp.imagesapitestapp.R
 import javax.inject.Inject
 
+class FavoritesFragment @Inject constructor(): Fragment() {
 
-class NotificationsFragment @Inject constructor(): Fragment() {
-
-    private lateinit var notificationsViewModel: NotificationsViewModel
+    private lateinit var favoritesViewModel: FavoritesViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        notificationsViewModel =
-                ViewModelProvider(this).get(NotificationsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_notifications, container, false)
-        val textView: TextView = root.findViewById(R.id.text_notifications)
-        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
+        favoritesViewModel =
+                ViewModelProvider(this).get(FavoritesViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_favorites, container, false)
+        val textView: TextView = root.findViewById(R.id.text_dashboard)
+        favoritesViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

@@ -1,9 +1,9 @@
 package com.catp.imagesapitestapp.di
 
 import androidx.fragment.app.Fragment
-import com.catp.imagesapitestapp.ui.dashboard.DashboardFragment
+import com.catp.imagesapitestapp.ui.favorites.FavoritesFragment
 import com.catp.imagesapitestapp.ui.home.HomeFragment
-import com.catp.imagesapitestapp.ui.notifications.NotificationsFragment
+import com.catp.imagesapitestapp.ui.settings.SettingsFragment
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -17,11 +17,11 @@ abstract class FragmentsModule {
     abstract fun homeFragment(fragment: HomeFragment): Fragment
     @Binds
     @IntoMap
-    @FragmentKey(DashboardFragment::class)
-    abstract fun dashboardFragment(fragment: DashboardFragment): Fragment
+    @FragmentKey(FavoritesFragment::class)
+    abstract fun dashboardFragment(fragment: FavoritesFragment): Fragment
     @Binds
     @IntoMap
-    @FragmentKey(NotificationsFragment::class)
-    abstract fun notificationsFragment(fragment: NotificationsFragment): Fragment
+    @FragmentKey(SettingsFragment::class)
+    abstract fun notificationsFragment(fragment: SettingsFragment): Fragment
 
 }
