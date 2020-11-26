@@ -35,6 +35,10 @@ class Repo @Inject constructor(private val api: UnsplashService, private val pho
         return photoDao.getAll().subscribeOn(Schedulers.io())
     }
 
+    fun getFavoritesPhotos(): Observable<List<Photo>> {
+        return photoDao.getLiked().subscribeOn(Schedulers.io())
+    }
+
     fun updatePhoto(photo: Photo): Single<Long> =
         Single.fromCallable {
             val result = photoDao.updatePhoto(photo)

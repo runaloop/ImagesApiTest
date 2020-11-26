@@ -11,7 +11,7 @@ interface Dao {
     fun getAll(): Observable<List<Photo>>
 
     @Query("SELECT * FROM Photo WHERE liked==1 ORDER BY created_at")
-    fun getLiked(): List<Photo>
+    fun getLiked(): Observable<List<Photo>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun updatePhoto(photo: Photo): Long

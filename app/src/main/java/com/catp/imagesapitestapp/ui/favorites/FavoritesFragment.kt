@@ -4,29 +4,37 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.catp.imagesapitestapp.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.catp.imagesapitestapp.databinding.FragmentFavoritesBinding
+import com.catp.imagesapitestapp.di.viewModelWithProvider
+import com.catp.imagesapitestapp.ui.home.PhotosAdapter
 import javax.inject.Inject
+import javax.inject.Provider
 
-class FavoritesFragment @Inject constructor(): Fragment() {
+//TODO: Каждый раз при переключении вкладок происходит запрос в сеть?!
+class FavoritesFragment @Inject constructor(
+    private val viewModelProvider: Provider<FavoritesViewModel>,
+    //TODO: тут похоже надо через квалифаер вставлять другой onClickListener, тк на клики реаигрует другая вьюмодель, или это фича?
+    private val adapter: PhotosAdapter
+) : Fragment() {
 
-    private lateinit var favoritesViewModel: FavoritesViewModel
+    private val favoritesViewModel: FavoritesViewModel by viewModelWithProvider { viewModelProvider.get() }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-        favoritesViewModel =
-                ViewModelProvider(this).get(FavoritesViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_favorites, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        favoritesViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+        val binding = FragmentFavoritesBinding.inflate(inflater, container, false)
+
+        binding.recyclerView.let {
+            it.layoutManager = LinearLayoutManager(activity)
+            it.adapter = adapter
+        }
+        favoritesViewModel.items.observe(viewLifecycleOwner) {
+            adapter.setData(it)
+        }
+        return binding.root
     }
 }

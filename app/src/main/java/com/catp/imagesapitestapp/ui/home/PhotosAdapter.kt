@@ -8,7 +8,8 @@ import com.catp.imagesapitestapp.data.model.db.Photo
 import com.catp.imagesapitestapp.databinding.PhotoItemBinding
 import javax.inject.Inject
 
-class PhotosAdapter @Inject constructor(
+class
+PhotosAdapter @Inject constructor(
     private val data: MutableList<Photo> = mutableListOf(),
     private val itemClickListener: OnItemClickListener
 ) :
