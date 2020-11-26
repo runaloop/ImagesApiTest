@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -16,10 +17,37 @@
 
         <ImageView
             android:id="@+id/imageView"
+            tools:src="@tools:sample/backgrounds/scenic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             app:setImage="@{photo.urlSmall}" />
+        <ImageButton
+            android:id="@+id/likeImage"
+            android:backgroundTint="#0fff"
+            app:setFavorite="@{photo.liked}"
+            app:notFavoriteIcon="@{@drawable/ic_baseline_favorite_border_48}"
+            app:favoriteIcon="@{@drawable/ic_baseline_favorite_48}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="8dp"
+
+            />
+        <TextView
+            android:padding="8dp"
+            android:background="@drawable/text_background"
+            android:textColor="?attr/colorOnPrimarySurface"
+            app:layout_constraintRight_toLeftOf="@id/likeImage"
+            app:layout_constraintBottom_toBottomOf="@id/likeImage"
+            app:layout_constraintTop_toTopOf="@id/likeImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:likesCount="@{photo.likes}"
+            tools:text="1234356"
+            />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
