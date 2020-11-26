@@ -86,6 +86,7 @@ dependencies {
     kapt "androidx.room:room-compiler:$versions.room"
     implementation "androidx.room:room-ktx:$versions.room"
     testImplementation "androidx.room:room-testing:$versions.room"
+    implementation "androidx.room:room-rxjava3:$versions.room"
 
     api "com.google.dagger:dagger:$versions.dagger"
     kapt "com.google.dagger:dagger-compiler:$versions.dagger"

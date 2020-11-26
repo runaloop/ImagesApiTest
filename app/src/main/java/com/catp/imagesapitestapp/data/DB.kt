@@ -6,5 +6,5 @@ import com.catp.imagesapitestapp.data.model.db.Photo
 
 @Database(entities = [Photo::class], version = 1)
 abstract class DB : RoomDatabase() {
-    abstract fun userDao(): Dao
+    abstract fun photoDao(): Dao
 }

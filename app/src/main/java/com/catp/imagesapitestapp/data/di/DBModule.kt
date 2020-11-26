@@ -15,4 +15,8 @@ class DBModule {
         applicationContext,
         DB::class.java, "database-name"
     ).build()
+
+    @Singleton
+    @Provides
+    fun dao(db: DB) = db.photoDao()
 }

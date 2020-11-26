@@ -19,7 +19,7 @@ buildscript {
           'gson': '2.8.0',
           'junit': '4.13',
           'truth': '1.0.1',
-          'room': '2.2.5',
+          'room': '2.3.0-alpha03',
           'dagger': '2.29.1',
   ]
   repositories {
