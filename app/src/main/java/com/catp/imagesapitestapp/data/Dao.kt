@@ -7,10 +7,10 @@ import io.reactivex.rxjava3.core.Observable
 
 @Dao
 interface Dao {
-    @Query("SELECT * FROM Photo")
+    @Query("SELECT * FROM Photo ORDER BY created_at")
     fun getAll(): Observable<List<Photo>>
 
-    @Query("SELECT * FROM Photo WHERE liked==1")
+    @Query("SELECT * FROM Photo WHERE liked==1 ORDER BY created_at")
     fun getLiked(): List<Photo>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
