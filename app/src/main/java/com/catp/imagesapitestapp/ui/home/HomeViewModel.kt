@@ -3,8 +3,9 @@ package com.catp.imagesapitestapp.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.catp.imagesapitestapp.data.Photo
 import com.catp.imagesapitestapp.data.UnsplashService
+import com.catp.imagesapitestapp.data.model.ApiPhotoToDbPhotoConverter
+import com.catp.imagesapitestapp.data.model.db.Photo
 import com.catp.imagesapitestapp.util.SingleLiveEvent
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -41,6 +42,8 @@ class HomeViewModel @Inject constructor(
             .doOnError {
                 _loading.value = false
                 _errorText.value = "Error ${it.message}"
+            }.map { list ->
+                list.map { ApiPhotoToDbPhotoConverter.convert(it) }
             }
             .subscribe { newValues ->
                 _items.value = newValues

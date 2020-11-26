@@ -1,6 +1,7 @@
 package com.catp.imagesapitestapp.data
 
 import com.catp.imagesapitestapp.BuildConfig
+import com.catp.imagesapitestapp.data.model.api.Photo
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Headers

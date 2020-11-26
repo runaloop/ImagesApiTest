@@ -6,21 +6,20 @@
 
         <variable
             name="photo"
-            type="com.catp.imagesapitestapp.data.Photo" />
+            type="com.catp.imagesapitestapp.data.model.db.Photo" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_marginTop="2dp"
         android:layout_width="match_parent"
-        android:layout_height="240dp">
+        android:layout_height="240dp"
+        android:layout_marginTop="2dp">
 
         <ImageView
             android:id="@+id/imageView"
-            android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:setImage="@{photo.urls.small}"
-            />
+            android:scaleType="centerCrop"
+            app:setImage="@{photo.urlSmall}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

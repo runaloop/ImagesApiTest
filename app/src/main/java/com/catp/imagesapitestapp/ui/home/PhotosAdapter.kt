@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.catp.imagesapitestapp.data.Photo
+import com.catp.imagesapitestapp.data.model.db.Photo
 import com.catp.imagesapitestapp.databinding.PhotoItemBinding
 
 class PhotosAdapter(private val data: MutableList<Photo>) :

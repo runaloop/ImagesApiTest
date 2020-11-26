@@ -5,6 +5,7 @@ import android.app.Application
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.catp.imagesapitestapp.App
+// ApiPhotoToDbPhotoConverter наверняка ведь есть более человеческий способ это заколбаисть?
 //    android:paddingTop="?attr/actionBarSize" как быстро находить подобные косяки?
 /**
  * Вот где храняться эти мульти биндинги?
