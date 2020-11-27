@@ -35,7 +35,27 @@ buildscript {
     // in the individual module build.gradle files
   }
 }
+plugins {
+  id("io.gitlab.arturbosch.detekt").version("1.15.0-RC1")
+}
+detekt {
+  input = files(                                        // The directories where detekt looks for source files. Defaults to `files("src/main/java", "src/main/kotlin")`.
+          "app/src/main/java"
+  )
+  failFast = true // fail build on any finding
+  buildUponDefaultConfig = true // preconfigure defaults
+  config = files("$projectDir/config/detekt.yml") // point to your custom config defining rules to run, overwriting default behavior
+  //baseline = file("$projectDir/config/baseline.xml") // a way of suppressing issues before introducing detekt
 
+  reports {
+    txt{
+      enabled = true // similar to the console output, contains issue signature to manually edit baseline files
+      destination = file("./detekt.txt")
+    }
+
+  }
+}
+tasks.detekt.jvmTarget = "1.8"
 allprojects {
   repositories {
     google()
