@@ -5,6 +5,8 @@ import android.app.Application
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.catp.imagesapitestapp.App
+import com.catp.imagesapitestapp.MainActivity
+
 //TODO: PhotoViewHolder нужно ли засовывать в дагер? и как лучше провайдером?
 //TODO: android:backgroundTint="#0fff" пока этого не было, цвет бекграунда иконки был серым, как выяснить кто его так покрасил?
 //TODO: ApiPhotoToDbPhotoConverter наверняка ведь есть более человеческий способ это заколбаисть?
@@ -20,42 +22,45 @@ import com.catp.imagesapitestapp.App
 //TODO: Получается дагер сразу генерит 2 типа зависимостей - первый это простая зависимость, вторая это провайдеры, и одновременно можно оба использовать?
 //TODO: JvmSuppressWildcards зачем нуен
 //TODO: Нужно ли инжектить LiveData/MutableLiveData в ViewModel?
-
+//TODO: Если в модуле AppComponent сидит DaggerFragmetnFactory, то получив оттуда Provider для фрагмента, при вызове get, все его зависимости будут удовлетворены в рамках того компонента в котором живет модуль!?!? О_о
 object Injector {
     fun init(app: App) {
         val appComponent = DaggerAppComponent.builder().application(app)
             .build()
         appComponent.inject(app)
-        app
-            .registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
-                override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-                    appComponent.inject(activity)
-                    (activity as FragmentActivity).supportFragmentManager.fragmentFactory = appComponent.daggerFragmentFactory()
-                }
+        app.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
+            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+                val activityComponent = appComponent
+                    .plus(ActivityModule(activity as MainActivity))
 
-                override fun onActivityStarted(activity: Activity) {
+                activityComponent.inject(activity)
+                (activity as FragmentActivity).supportFragmentManager.fragmentFactory =
+                    activityComponent.daggerFragmentFactory()
+            }
 
-                }
+            override fun onActivityStarted(activity: Activity) {
 
-                override fun onActivityResumed(activity: Activity) {
+            }
 
-                }
+            override fun onActivityResumed(activity: Activity) {
 
-                override fun onActivityPaused(activity: Activity) {
+            }
 
-                }
+            override fun onActivityPaused(activity: Activity) {
 
-                override fun onActivityStopped(activity: Activity) {
+            }
 
-                }
+            override fun onActivityStopped(activity: Activity) {
 
-                override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
+            }
 
-                }
+            override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
 
-                override fun onActivityDestroyed(activity: Activity) {
+            }
 
-                }
-            })
+            override fun onActivityDestroyed(activity: Activity) {
+
+            }
+        })
     }
 }

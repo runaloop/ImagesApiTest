@@ -4,6 +4,7 @@ import com.catp.imagesapitestapp.data.model.db.Photo
 import dagger.Module
 import dagger.Provides
 import io.reactivex.rxjava3.disposables.CompositeDisposable
+import javax.inject.Named
 
 
 @Module

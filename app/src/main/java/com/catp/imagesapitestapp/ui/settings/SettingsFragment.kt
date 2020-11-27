@@ -1,33 +1,44 @@
 package com.catp.imagesapitestapp.ui.settings
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.catp.imagesapitestapp.R
+import com.catp.imagesapitestapp.databinding.FragmentSettingsBinding
+import com.catp.imagesapitestapp.di.viewModelWithProvider
 import javax.inject.Inject
+import javax.inject.Provider
 
 
-class SettingsFragment @Inject constructor(): Fragment() {
+class SettingsFragment @Inject constructor(
+    private val viewModelProvider: Provider<SettingsViewModel>,
+    private val switchNightMode: SwitchNightMode
 
-    private lateinit var settingsViewModel: SettingsViewModel
+) : Fragment() {
+
+    private val settingsViewModel by viewModelWithProvider { viewModelProvider.get() }
+
+    //TODO: Как правильно хранить стейт при переключении темы? Если делать по феншую -
+    // через ViewModel то при пересоздании активити ViewModel останется жив, и все
+    // зависимости(интеракторы) остануться закешированными от прошлого пересоздания потому что ViewModel
+    // сохраниться изза смены конфигурации, или делать не по феншую, и хранить эту инфу внутри фрагмента?
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-        settingsViewModel =
-                ViewModelProvider(this).get(SettingsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_settings, container, false)
-        val textView: TextView = root.findViewById(R.id.text_notifications)
-        settingsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+        val binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        binding.nightModeSwitch.isChecked = isNightModeActive()
+        binding.viewModel = settingsViewModel
+        binding.switchNightMode = switchNightMode
+
+        return binding.root
     }
+
+    private fun isNightModeActive(): Boolean =
+        resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
+
 }

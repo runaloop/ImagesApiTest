@@ -1,6 +1,5 @@
 package com.catp.imagesapitestapp.di
 
-import android.app.Activity
 import android.app.Application
 import com.catp.imagesapitestapp.App
 import com.catp.imagesapitestapp.data.di.DBModule
@@ -10,7 +9,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [RetrofitModule::class, FragmentsModule::class, UtilModule::class, ApplicationContextModule::class, DBModule::class])
+@Component(modules = [RetrofitModule::class, UtilModule::class, ApplicationContextModule::class, DBModule::class])
 interface AppComponent {
     @Component.Builder
     interface Builder {
@@ -19,8 +18,6 @@ interface AppComponent {
         fun build(): AppComponent
     }
 
-    fun daggerFragmentFactory(): DaggerFragmentFactory
-
+    fun plus(module: ActivityModule): ActivityComponent
     fun inject(app: App)
-    fun inject(activity: Activity)
 }
