@@ -12,10 +12,8 @@ import com.catp.imagesapitestapp.ui.home.PhotosAdapter
 import javax.inject.Inject
 import javax.inject.Provider
 
-//TODO: Каждый раз при переключении вкладок происходит запрос в сеть?!
 class FavoritesFragment @Inject constructor(
     private val viewModelProvider: Provider<FavoritesViewModel>,
-    //TODO: тут похоже надо через квалифаер вставлять другой onClickListener, тк на клики реаигрует другая вьюмодель, или это фича?
     private val adapter: PhotosAdapter
 ) : Fragment() {
 
