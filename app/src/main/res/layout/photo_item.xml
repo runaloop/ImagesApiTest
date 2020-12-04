@@ -24,7 +24,7 @@
             app:setImage="@{photo.urlSmall}" />
         <ImageButton
             android:id="@+id/likeImage"
-            android:backgroundTint="#0fff"
+            android:background="@null"
             app:setFavorite="@{photo.liked}"
             app:notFavoriteIcon="@{@drawable/ic_baseline_favorite_border_48}"
             app:favoriteIcon="@{@drawable/ic_baseline_favorite_48}"

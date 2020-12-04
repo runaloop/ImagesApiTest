@@ -4,7 +4,14 @@ plugins {
     id "kotlin-kapt"
 }
 
-
+kapt{
+    correctErrorTypes = true
+    javacOptions {
+        option("-Xmaxerrs", 1000)
+        option("-Adagger.fastInit=enabled") // https://google.github.io/dagger/compiler-options
+        option("-Adagger.experimentalDaggerErrorMessages=enabled") // https://github.com/google/dagger/issues/1769
+    }
+}
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.1"
