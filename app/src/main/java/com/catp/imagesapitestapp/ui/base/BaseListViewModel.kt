@@ -13,23 +13,18 @@ import javax.inject.Inject
 
 open class BaseListViewModel @Inject constructor(
     protected val repo: Repo,
-    private val cs: CompositeDisposable
+    private val cs: CompositeDisposable,
+    private val _errorText: SingleLiveEvent<String>,
+    private val _loading: MutableLiveData<Boolean>,
+    private val _items: MutableLiveData<List<Photo>>
 ) : ViewModel() {
 
-
-    private val _errorText = SingleLiveEvent<String>()
     val errorText = _errorText as LiveData<String>
-
-    private val _loading = MutableLiveData<Boolean>().apply {
-        true
-    }
     val loading: LiveData<Boolean> = _loading
-
-    private val _items = MutableLiveData<List<Photo>>()
     val items: LiveData<List<Photo>> = _items
 
-    //TODO: Насколько правильно обновлять состояние ошибки из двух несвязанных мест?
     init {
+        //TODO: Насколько правильно обновлять состояние ошибки из двух несвязанных мест?
         refreshList()
         observePhotos()
     }
