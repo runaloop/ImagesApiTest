@@ -1,11 +1,12 @@
 package com.catp.imagesapitestapp.data.model.api
 
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 data class Photo(
 
     @SerializedName("id") val id: String,
-    @SerializedName("created_at") val created_at: String,
+    @SerializedName("created_at") val created_at: Date,
     @SerializedName("updated_at") val updated_at: String,
     @SerializedName("promoted_at") val promoted_at: String,
     @SerializedName("width") val width: Int,
