@@ -14,8 +14,7 @@ import javax.inject.Inject
 open class BaseListViewModel @Inject constructor(
     protected val repo: Repo,
     private val cs: CompositeDisposable
-) :
-    ViewModel() {
+) : ViewModel() {
 
 
     private val _errorText = SingleLiveEvent<String>()
@@ -31,15 +30,14 @@ open class BaseListViewModel @Inject constructor(
 
     //TODO: Насколько правильно обновлять состояние ошибки из двух несвязанных мест?
     init {
-        repo.requestRecentPhotos()
-            .doOnError {
-                _errorText.value = "Network error ${it.message}"
-            }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()
-            .addTo(cs)
+        refreshList()
+        observePhotos()
+    }
 
-        repo.getRecentPhotos()
+    open fun getPhotosObservable() = repo.getRecentPhotos()
+    fun observePhotos() {
+
+        getPhotosObservable()
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
                 _loading.value = true
@@ -59,6 +57,7 @@ open class BaseListViewModel @Inject constructor(
             .doOnError {
                 _errorText.value = "Network error ${it.message}"
             }
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
             .addTo(cs)
     }
@@ -89,7 +88,7 @@ open class BaseListViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
 
-            },{
+            }, {
                 _errorText.value = "Can't update: ${it.message}"
             })
             .addTo(cs)
