@@ -7,5 +7,4 @@ import dagger.Subcomponent
 interface ActivityComponent {
     fun inject(activity: Activity)
     fun daggerFragmentFactory(): DaggerFragmentFactory
-
 }

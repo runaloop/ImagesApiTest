@@ -7,7 +7,6 @@ import okhttp3.OkHttpClient
 import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module(includes = [OkHttpModule::class, JsonConverterModule::class, AsyncAdapterModule::class])
@@ -16,7 +15,7 @@ class RetrofitModule {
     @Provides
     fun api(
         httpClient: OkHttpClient,
-        @Named("BASE_URL") baseUrl: String,
+        @BaseUrl baseUrl: String,
         jsonFactory: Converter.Factory,
         callAdapterFactory: CallAdapter.Factory
     ) = Retrofit.Builder()
@@ -28,6 +27,6 @@ class RetrofitModule {
         .create(UnsplashService::class.java)
 
     @Provides
-    @Named("BASE_URL")
+    @BaseUrl
     fun baseUrl() = "https://api.unsplash.com/"
 }
