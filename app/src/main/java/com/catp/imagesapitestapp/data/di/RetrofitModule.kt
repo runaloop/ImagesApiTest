@@ -5,7 +5,7 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import retrofit2.CallAdapter
-import retrofit2.Converter
+import retrofit2.Converter.Factory
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
@@ -16,7 +16,7 @@ class RetrofitModule {
     fun api(
         httpClient: OkHttpClient,
         @BaseUrl baseUrl: String,
-        jsonFactory: Converter.Factory,
+        jsonFactory: Factory,
         callAdapterFactory: CallAdapter.Factory
     ) = Retrofit.Builder()
         .baseUrl(baseUrl)

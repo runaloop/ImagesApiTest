@@ -1,5 +1,6 @@
 package com.catp.imagesapitestapp.data.di
 
+import com.catp.imagesapitestapp.data.model.db.Photo
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -11,7 +12,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 class JsonConverterModule {
     @Provides
     fun gsonProvider(): Gson {
-        return GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX").create()
+        return GsonBuilder()
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX")
+            .create()
     }
 
     @Provides
