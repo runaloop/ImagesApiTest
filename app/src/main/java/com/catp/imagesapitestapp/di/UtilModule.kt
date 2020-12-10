@@ -9,12 +9,13 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 
 
 @Module
-class UtilModule() {
+class UtilModule {
     @Provides
     fun singleStringLiveEvent() = SingleLiveEvent<String>()
 
     @Provides
     fun mutableBooleanLiveData() = MutableLiveData<Boolean>()
+
     @Provides
     fun mutablePhotoListLiveData() = MutableLiveData<List<Photo>>()
 

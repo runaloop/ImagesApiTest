@@ -18,5 +18,6 @@ class OkHttpModule {
 
     @Singleton
     @Provides
-    fun logginInterceptor() = HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) }
+    fun loggingInterceptor() =
+        HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) }
 }

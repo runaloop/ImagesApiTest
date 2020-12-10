@@ -15,7 +15,7 @@ class DaggerFragmentFactory @Inject constructor(
 
         return if (provider != null) {
             provider.get()
-        }else{
+        } else {
             super.instantiate(classLoader, className)
         }
     }

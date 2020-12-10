@@ -7,7 +7,7 @@ import java.util.*
 @Entity
 data class Photo(
     @PrimaryKey val id: String,
-    val created_at: Date = Date(),
+    val createdAt: Date = Date(),
     val width: Int = 0,
     val height: Int = 0,
     val urlSmall: String = "",

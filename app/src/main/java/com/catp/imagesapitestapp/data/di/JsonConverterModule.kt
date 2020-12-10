@@ -1,6 +1,5 @@
 package com.catp.imagesapitestapp.data.di
 
-import com.catp.imagesapitestapp.data.model.db.Photo
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module

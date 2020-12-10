@@ -18,7 +18,7 @@ class RetrofitModule {
         @BaseUrl baseUrl: String,
         jsonFactory: Factory,
         callAdapterFactory: CallAdapter.Factory
-    ) = Retrofit.Builder()
+    ): UnsplashService = Retrofit.Builder()
         .baseUrl(baseUrl)
         .client(httpClient)
         .addConverterFactory(jsonFactory)

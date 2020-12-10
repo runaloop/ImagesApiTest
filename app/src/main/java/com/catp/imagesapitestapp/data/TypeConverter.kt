@@ -5,12 +5,12 @@ import java.util.*
 
 class TypeConverter {
     @TypeConverter
-    fun toDate(dateLong:Long):Date {
+    fun toDate(dateLong: Long): Date {
         return Date(dateLong)
     }
 
     @TypeConverter
-    fun fromDate(date: Date):Long{
-        return date.time;
+    fun fromDate(date: Date): Long {
+        return date.time
     }
 }

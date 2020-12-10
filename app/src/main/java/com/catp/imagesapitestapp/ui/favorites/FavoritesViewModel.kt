@@ -1,6 +1,5 @@
 package com.catp.imagesapitestapp.ui.favorites
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.catp.imagesapitestapp.data.Repo
 import com.catp.imagesapitestapp.data.model.db.Photo
@@ -16,6 +15,6 @@ class FavoritesViewModel @Inject constructor(
     errorTextLiveData: SingleLiveEvent<String>,
     loadingState: MutableLiveData<Boolean>,
     items: MutableLiveData<List<Photo>>
-    ) : BaseListViewModel(repo, cs, errorTextLiveData, loadingState, items) {
+) : BaseListViewModel(repo, cs, errorTextLiveData, loadingState, items) {
     override fun getPhotosObservable(): Observable<List<Photo>> = repo.getFavoritesPhotos()
 }

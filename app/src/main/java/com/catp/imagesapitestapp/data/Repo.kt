@@ -40,13 +40,14 @@ class Repo @Inject constructor(private val api: UnsplashService, private val pho
     }
 
     fun updatePhoto(photo: Photo): Single<Long> =
-        Single.fromCallable {
-            val result = photoDao.updatePhoto(photo)
-            if (result != -1L)
-                throw IOException("Cant update photo: $photo")
-            else
-                result
-        }
+        Single
+            .fromCallable {
+                val result = photoDao.updatePhoto(photo)
+                if (result != -1L)
+                    throw IOException("Cant update photo: $photo")
+                else
+                    result
+            }
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
 }

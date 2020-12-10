@@ -25,4 +25,3 @@ fun setFavorite(
 fun likesCount(view: TextView, likesCount: Int) {
     view.text = likesCount.toString()
 }
-

@@ -30,7 +30,7 @@ open class BaseListViewModel @Inject constructor(
     }
 
     open fun getPhotosObservable() = repo.getRecentPhotos()
-    fun observePhotos() {
+    private fun observePhotos() {
 
         getPhotosObservable()
             .observeOn(AndroidSchedulers.mainThread())

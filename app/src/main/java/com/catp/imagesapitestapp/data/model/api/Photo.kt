@@ -4,23 +4,22 @@ import com.google.gson.annotations.SerializedName
 import java.util.*
 
 data class Photo(
-
-    @SerializedName("id") val id: String,
-    @SerializedName("created_at") val created_at: Date,
-    @SerializedName("updated_at") val updated_at: String,
-    @SerializedName("promoted_at") val promoted_at: String,
-    @SerializedName("width") val width: Int,
-    @SerializedName("height") val height: Int,
-    @SerializedName("color") val color: String,
-    @SerializedName("blur_hash") val blur_hash: String,
-    @SerializedName("description") val description: String,
-    @SerializedName("alt_description") val alt_description: String,
-    @SerializedName("urls") val urls: Urls,
-    @SerializedName("links") val links: Links,
-    @SerializedName("categories") val categories: List<String>,
-    @SerializedName("likes") val likes: Int,
-    @SerializedName("liked_by_user") val liked_by_user: Boolean,
-    @SerializedName("current_user_collections") val current_user_collections: List<String>,
-    @SerializedName("sponsorship") val sponsorship: Sponsorship,
-    @SerializedName("user") val user: User
+    val id: String,
+    @SerializedName("created_at") val createdAt: Date,
+    @SerializedName("updated_at") val updatedAt: String,
+    @SerializedName("promoted_at") val promotedAt: String,
+    val width: Int,
+    val height: Int,
+    val color: String,
+    @SerializedName("blur_hash") val blurHash: String,
+    val description: String,
+    @SerializedName("alt_description") val altDescription: String,
+    val urls: Urls,
+    val links: Links,
+    val categories: List<String>,
+    val likes: Int,
+    @SerializedName("liked_by_user") val likedByUser: Boolean,
+    @SerializedName("current_user_collections") val currentUserCollections: List<String>,
+    val sponsorship: Sponsorship,
+    val user: User
 )

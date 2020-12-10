@@ -15,10 +15,12 @@ abstract class FragmentsModule {
     @IntoMap
     @FragmentKey(HomeFragment::class)
     abstract fun homeFragment(fragment: HomeFragment): Fragment
+
     @Binds
     @IntoMap
     @FragmentKey(FavoritesFragment::class)
     abstract fun dashboardFragment(fragment: FavoritesFragment): Fragment
+
     @Binds
     @IntoMap
     @FragmentKey(SettingsFragment::class)
