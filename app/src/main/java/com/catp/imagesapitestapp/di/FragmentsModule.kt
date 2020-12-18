@@ -1,6 +1,7 @@
 package com.catp.imagesapitestapp.di
 
 import androidx.fragment.app.Fragment
+import com.catp.imagesapitestapp.ui.detail.DetailFragment
 import com.catp.imagesapitestapp.ui.favorites.FavoritesFragment
 import com.catp.imagesapitestapp.ui.home.HomeFragment
 import com.catp.imagesapitestapp.ui.settings.SettingsFragment
@@ -10,6 +11,11 @@ import dagger.multibindings.IntoMap
 
 @Module
 abstract class FragmentsModule {
+
+    @Binds
+    @IntoMap
+    @FragmentKey(DetailFragment::class)
+    abstract fun detailFragment(fragment: DetailFragment): Fragment
 
     @Binds
     @IntoMap

@@ -1,4 +1,4 @@
-package com.catp.imagesapitestapp.ui.base
+package com.catp.imagesapitestapp.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,19 +11,17 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 import javax.inject.Inject
 
-open class BaseListViewModel @Inject constructor(
+open class DetailViewModel @Inject constructor(
     protected val repo: Repo,
     private val cs: CompositeDisposable,
     private val _errorText: SingleLiveEvent<String>,
     private val _loading: MutableLiveData<Boolean>,
-    private val _items: MutableLiveData<List<Photo>>,
-    private val _navigateToDetailScreen: MutableLiveData<Photo?>
+    private val _items: MutableLiveData<List<Photo>>
 ) : ViewModel() {
 
     val errorText = _errorText as LiveData<String>
     val loading: LiveData<Boolean> = _loading
     val items: LiveData<List<Photo>> = _items
-    val navigateToDetailScreen = _navigateToDetailScreen as LiveData<Photo?>
 
     init {
         //TODO: Насколько правильно обновлять состояние ошибки из двух несвязанных мест?
@@ -73,10 +71,6 @@ open class BaseListViewModel @Inject constructor(
         super.onCleared()
     }
 
-    fun onItemClick(photo: Photo) {
-        _navigateToDetailScreen.value = photo
-    }
-
     fun onLikeClick(photo: Photo) {
         if (photo.liked) {
             photo.liked = false
@@ -93,9 +87,5 @@ open class BaseListViewModel @Inject constructor(
                 _errorText.value = "Can't update: ${it.message}"
             })
             .addTo(cs)
-    }
-
-    fun navigateToDetailDone() {
-        _navigateToDetailScreen.value = null
     }
 }

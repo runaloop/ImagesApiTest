@@ -11,7 +11,11 @@
       android:name="com.catp.imagesapitestapp.ui.home.HomeFragment"
       android:label="@string/title_home"
       tools:layout="@layout/fragment_home"
-      />
+      >
+    <action
+        android:id="@+id/action_navigation_home_to_detailFragment"
+        app:destination="@id/detailFragment" />
+  </fragment>
 
   <fragment
       android:id="@+id/navigation_dashboard"
@@ -26,4 +30,12 @@
       android:label="@string/title_settings"
       tools:layout="@layout/fragment_settings"
       />
+  <fragment
+      android:id="@+id/detailFragment"
+      android:name="com.catp.imagesapitestapp.ui.detail.DetailFragment"
+      android:label="DetailFragment" >
+    <argument
+        android:name="photo"
+        app:argType="com.catp.imagesapitestapp.data.model.db.Photo" />
+  </fragment>
 </navigation>

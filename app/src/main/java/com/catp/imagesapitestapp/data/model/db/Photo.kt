@@ -2,6 +2,7 @@ package com.catp.imagesapitestapp.data.model.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 import java.util.*
 
 @Entity
@@ -16,4 +17,4 @@ data class Photo(
     var liked: Boolean = false,
     val userId: String = "",
     val userName: String = ""
-)
+): Serializable

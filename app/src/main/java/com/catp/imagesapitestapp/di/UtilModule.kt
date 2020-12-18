@@ -20,6 +20,9 @@ class UtilModule {
     fun mutablePhotoListLiveData() = MutableLiveData<List<Photo>>()
 
     @Provides
+    fun mutablePhotoLiveData() = MutableLiveData<Photo?>()
+
+    @Provides
     fun compositeDisposable() = CompositeDisposable()
 
     @Provides

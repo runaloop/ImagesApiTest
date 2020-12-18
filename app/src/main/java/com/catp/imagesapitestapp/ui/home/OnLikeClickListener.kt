@@ -4,8 +4,8 @@ import com.catp.imagesapitestapp.data.model.db.Photo
 import javax.inject.Inject
 
 
-class OnItemClickListener @Inject constructor(private val viewModel: HomeViewModel) {
+class OnLikeClickListener @Inject constructor(private val viewModel: HomeViewModel) {
     fun onClick(photo: Photo) {
-        viewModel.onItemClick(photo)
+        viewModel.onLikeClick(photo)
     }
 }

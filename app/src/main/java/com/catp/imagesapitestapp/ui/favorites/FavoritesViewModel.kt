@@ -14,7 +14,8 @@ class FavoritesViewModel @Inject constructor(
     cs: CompositeDisposable,
     errorTextLiveData: SingleLiveEvent<String>,
     loadingState: MutableLiveData<Boolean>,
-    items: MutableLiveData<List<Photo>>
-) : BaseListViewModel(repo, cs, errorTextLiveData, loadingState, items) {
+    items: MutableLiveData<List<Photo>>,
+    navigateToDetailScreen: MutableLiveData<Photo?>
+) : BaseListViewModel(repo, cs, errorTextLiveData, loadingState, items, navigateToDetailScreen) {
     override fun getPhotosObservable(): Observable<List<Photo>> = repo.getFavoritesPhotos()
 }

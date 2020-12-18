@@ -13,7 +13,7 @@ class OkHttpModule {
     fun httpClient(interceptor: HttpLoggingInterceptor) =
         OkHttpClient
             .Builder()
-            .addInterceptor(interceptor)
+            //.addInterceptor(interceptor)
             .build()
 
     @Singleton

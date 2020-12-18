@@ -11,6 +11,7 @@ import javax.inject.Inject
 class
 PhotosAdapter @Inject constructor(
     private val data: MutableList<Photo> = mutableListOf(),
+    private val likeClickListener: OnLikeClickListener,
     private val itemClickListener: OnItemClickListener
 ) :
     RecyclerView.Adapter<PhotoViewHolder>() {
@@ -38,8 +39,12 @@ PhotosAdapter @Inject constructor(
         val photo = data[position]
         holder.bind(photo)
         holder.itemBinding.likeImage.setOnClickListener {
+            likeClickListener.onClick(photo)
+        }
+        holder.itemBinding.imageView.setOnClickListener {
             itemClickListener.onClick(photo)
         }
+        holder.itemBinding.imageView.transitionName = photo.id
     }
 
     override fun getItemCount(): Int =
